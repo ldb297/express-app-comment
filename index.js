@@ -12,8 +12,12 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
 //set routes
-app.get('/', (req,res)=>{
-    res.render('index')
+app.get('/', function(req, res) {
+    const spaceAPI = 'https://images-api.nasa.gov/'
+    axios.get(spaceAPI).then(result=>{
+      const image = result.stuff.otherstuff
+      res.render('index', { image: image })
+   })
 })
 
 app.use('/home', require('./controllers/home'))
