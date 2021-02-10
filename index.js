@@ -12,12 +12,14 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
 //set routes
-app.get('/', function(req, res) {
-    const spaceAPI = 'https://images-api.nasa.gov/'
-    axios.get(spaceAPI).then(result=>{
-      const image = result.stuff.otherstuff
-      res.render('index', { image: image })
-   })
+app.get('/', async(req,res)=>{
+   try {
+      let result = await axios.get('https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image')
+      let spaceObject = await axios.get(result.config.url)
+      res.render('spacepages/index', {spaceObject})
+   } catch(e) {
+      console.log(e.message)
+   }
 })
 
 app.use('/home', require('./controllers/home'))
