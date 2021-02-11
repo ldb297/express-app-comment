@@ -1,7 +1,29 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios')
 const db = require('../models')
 
+//*****WORKING ROUTES************/
+router.get('/', async(req,res)=>{
+    try {
+       let result = await axios.get('https://images-api.nasa.gov/search?q=runaway&media_type=image')
+       let spaceObject = await axios.get(result.config.url)
+       res.render('spacepages/home', {spaceObject})
+    } catch(e) {
+       console.log(e.message)
+    }
+ })
+
+router.get('/image', (req,res)=>{
+    console.log(req.body.imgLink)
+    console.log(req.body.imgTitle)
+        let spaceObject = {
+            link: req.body.imgLink,
+            title: req.body.imgTitle }
+        res.render('spacepages/singleimage', {spaceObject} )
+})
+
+///**************INOP ROUTES***********/
 // router.get('/', (req,res)=>{ //this route should display all images
 //     db.images.findAll()
 //     .then(images=>{
@@ -13,7 +35,7 @@ const db = require('../models')
 //         console.log(`*************`)
 //     })
 // })
-
+/*
 router.get('/', async(req,res)=>{
     try {
         const image = await db.images.findAll()
@@ -78,5 +100,6 @@ router.post('/', async(req,res)=>{
         console.log(`*************`)
     }
 })
+*/
 
 module.exports = router

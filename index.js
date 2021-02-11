@@ -10,13 +10,19 @@ const app = express()
 //set middleware
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
+app.use(express.urlencoded({extended: false}))
 
 //set routes
-app.get('/', async(req,res)=>{
+app.get('/', (req,res)=>{
+   res.render('index')
+})
+
+app.post('/', async(req,res)=>{
    try {
-      let result = await axios.get('https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image')
+      let search = req.body.name
+      let result = await axios.get(`https://images-api.nasa.gov/search?q=${search}&media_type=image`)
       let spaceObject = await axios.get(result.config.url)
-      res.render('spacepages/index', {spaceObject})
+      res.render('spacepages/home', {spaceObject})
    } catch(e) {
       console.log(e.message)
    }
