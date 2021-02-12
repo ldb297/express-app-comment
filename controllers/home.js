@@ -20,7 +20,6 @@ router.post('/image', async(req,res)=>{
         const [user, created] = await db.user.findOrCreate({where: {name, age}})
         const [image, created1] = await db.images.findOrCreate({where: {url, name: title}})
         const [comment, created2] = await db.comment.findOrCreate({where: {content}})
-        //so what do i do if there's more than one item being created here?
     }
     catch(e){
         console.log(`uh oh! you got a ${e.message}`)

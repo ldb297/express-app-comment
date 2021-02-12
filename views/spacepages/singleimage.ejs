@@ -1,16 +1,27 @@
-here user should be able to access a comment form to enter a first name and comment
-    
+<%# here will show user logging a comment on an image. user has many images & comments, images has many users & comments, comments have one user and one image. %>
 <img class="rounded" class="container-lg" src="<%= spaceObject.url %>" alt="<%= spaceObject.title %>">
 <p><%= spaceObject.title %></p>
 
 <form action="/home/image" method="POST">
-    <label for="name">name:</label>
-    <input name="name" type="text" id="name">
-    <label for="age">age:</label>
-    <input name="age" type="text" id="age">
-    <label for="content">comments:</label>
-    <input name="content" type="text" id="comment">
-    <button type="submit">Submit!</button>
+    <div class="form-floating">
+        <textarea class="form-control" style="height: 150px" name="content"  id="comment"></textarea>
+        <label for="content">comments</label>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <div class="form-floating mb-3">
+            <input name="name" type="text" id="name" class="form-control" style="width: 50%">
+            <label for="name">name</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input name="age" type="text" id="age" class="form-control" style="width: 50%">
+            <label for="age">age</label>
+        </div>
+    </div>
+    
+    <button type="submit" class="rounded">Submit!</button>
+    
     <input type="hidden" name="url" value="<%= spaceObject.link %>">
     <input type="hidden" name="title" value="<%= spaceObject.title %>">
 </form>
