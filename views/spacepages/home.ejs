@@ -2,7 +2,7 @@
 <br/>
 <p>Click an image to add to favorites!</p>
 <% for(let i = 0; i < 21; i++){ %>
-    <form action="/home/image" method="get">
+    <form action="/home/image" method="POST">
         <input type="hidden" name="imgLink" value="<%=spaceObject.data.collection.items[i].links[0].href %>"> 
         <input type="hidden" name="imgTitle" value="<%=spaceObject.data.collection.items[i].data[0].title %>">
         <input type="image"  name="submit" class="rounded" class="container-lg" src="<%= spaceObject.data.collection.items[i].links[0].href %>" alt="Submit">  
