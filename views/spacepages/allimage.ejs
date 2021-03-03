@@ -1,0 +1,8 @@
+<% for(let i = 0; i < allImages.length; i++){ %>
+    <form action="/home/<%= allImages[i].get().id %>" method="get">
+        <input type="hidden" name="url" id="url" value="<%= allImages[i].get().url %>"> 
+        <input type="hidden" name="title" id="title" value="<%= allImages[i].get().name %>">
+        <input type="image"  name="submit" class="rounded" class="container-lg" src="<%= allImages[i].get().url %>" alt="Submit">  
+            <p><%= allImages[i].get().name %></p>
+    </form>
+<% } %>

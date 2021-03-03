@@ -1,0 +1,9 @@
+<% const image = thisImage.get() %>
+click the pic to delete it forever from your database
+<form action="/home/<%= image.id%>/?_method=DELETE" method="POST">
+    <input type="hidden" name="url" id="url" value="<%= image.url %>"> 
+    <input type="hidden" name="title" id="title" value="<%= image.name %>">
+    <input type="image"  name="submit" class="rounded" class="container-lg" src="<%= image.url %>" alt="Submit">  
+        <p><%= image.name %></p>
+
+</form>
